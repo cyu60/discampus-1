@@ -3,33 +3,38 @@ const { Schema } = mongoose;
 
 
 const eventSchema = Schema({
-	email: {
+	// email: {
+	// 	type: String,
+	// 	required: true
+	// },
+	// campusGroupsLink: {
+	// 	type: String, 
+	// 	required: true,
+	// },
+	// eventName: {
+	// 	type: String,
+	// 	required: true,
+	// },
+	// orgName: {
+
+	// }, 
+	// years: {},
+	// majors: {},
+	// categories: {},
+	// img: {
+    //     data: Buffer,
+    //     contentType: String
+    // },
+	// desctiption: {
+	// 	type: String,
+	// },
+	// mailingList: {
+
+	// }
+
+	description: {
 		type: String,
 		required: true
-	},
-	campusGroupsLink: {
-		type: String, 
-		required: true,
-	},
-	eventName: {
-		type: String,
-		required: true,
-	},
-	orgName: {
-
-	}, 
-	years: {},
-	majors: {},
-	categories: {},
-	img: {
-        data: Buffer,
-        contentType: String
-    },
-	desctiption: {
-		type: String,
-	},
-	mailingList: {
-
 	}
 
 });
