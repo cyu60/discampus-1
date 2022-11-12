@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const attendeeSchema = Schema ({
-	email: {
-		type: String, 
-		required: true,
-		lowercase: true
-	},
+	// email: {
+	// 	type: String, 
+	// 	required: true,
+	// 	lowercase: true
+	// },
+	phoneNumber: String,
 	interests: {
 		type: [String], 
 		required: true
 	},
-	phone: Number,
 	major: {
 		type: String,
 		required: true

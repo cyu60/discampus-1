@@ -35,6 +35,10 @@ const eventSchema = Schema({
 	description: {
 		type: String,
 		required: true
+	},
+	categories: {
+		type: [String],
+		required: true
 	}
 
 });
