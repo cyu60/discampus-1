@@ -1,8 +1,10 @@
 const express = require("express");
+const path = require('path');
 require('dotenv').config();
 
 const Event = require("../models/Event.js");
 const router = express.Router();
+
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -27,6 +29,10 @@ router.post("/events", async (req, res) => {
 		description: req.body.description,
 	})
 	await event.save()
+
+
+
+    // sso and if pass, send out message 
 
     const message = await client.messages.create({
         body: `${event.description}`,
