@@ -18,6 +18,31 @@ const client = require('twilio')(accountSid, authToken);
 // get all events 
 router.get("/events", async (req, res, next) => {
     const events = await Event.find()
+
+
+
+    const sgMail = require('@sendgrid/mail')
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+    const msg = {
+    to: 'jmiran15@jhu.edu', // Change to your recipient
+    from: 'discampusevents@gmail.com', // Change to your verified sender
+    subject: 'Sending with SendGrid is Fun',
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    }
+    sgMail
+    .send(msg)
+    .then(() => {
+        console.log('Email sent')
+    })
+    .catch((error) => {
+        console.error(error)
+    })
+
+
+
+
+
 	res.send(events)
 });
 
@@ -45,25 +70,26 @@ router.post("/events", async (req, res) => {
         let numbers_ = attendees.map((attendee) => attendee.phoneNumber);
         for (const phoneNumber of numbers_) {
             phoneNumbers.add(phoneNumber);
-            console.log(phoneNumber)
         }
     }
 
 
     // res.send({a: [...phoneNumbers]});
-    
+    let numMessages = 0;
+    phoneNumbers.forEach(async (phoneNumber) => {
+        try {
+            const message = await client.messages.create({
+                body: `${event.description}`,
+                from: `${myNumber}`,
+                to: `+17328902578`
+            })
+            numMessages++;
+        } catch (e) {
+            console.log(e.message);
+        }
+    })
 
-
-
-    // sso and if pass, send out message 
-
-    // const message = await client.messages.create({
-    //     body: `${event.description}`,
-    //     from: `+${myNumber}`,
-    //     to: '+14075801974'
-    // })
-
-	// res.send(message.sid);
+	res.json(numMessages);
 });
 
 
