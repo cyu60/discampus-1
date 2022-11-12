@@ -7,7 +7,7 @@ const verification = require("./routes/verification");
 
 
 
-
+const attendees = require("./routes/attendees");
 
 mongoose
 	.connect(process.env.MONGODB, { useNewUrlParser: true })
@@ -21,9 +21,8 @@ mongoose
 		app.use(express.json()); 
 		app.use(cors());
 		app.use("/api", events)
+		app.use("/api", attendees)
 		app.use("/api", verification)
-
-
 
         const PORT = process.env.PORT || 5000;
 
